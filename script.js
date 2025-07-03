@@ -326,8 +326,27 @@ document.addEventListener('DOMContentLoaded', () => {
         snapSpeed: 100,
     };
 
+    // ボードのサイズを動的に設定する関数を追加
+    const setBoardSize = () => {
+        const boardContainer = document.getElementById('board');
+        // 親要素の幅に合わせてボードのサイズを調整
+        const containerWidth = boardContainer.parentElement.offsetWidth;
+        // 画面幅と最大の400pxを比較して小さい方を採用
+        const newSize = Math.min(containerWidth, 400); 
+        boardContainer.style.width = `${newSize}px`;
+        boardContainer.style.height = `${newSize}px`; // 高さを幅に合わせる
+        if (board) { // boardが初期化されている場合のみpositionを更新
+            board.resize(); // chessboard.js のリサイズ関数を呼び出す
+        }
+    };
+
     // Initialize the chessboard
     board = Chessboard('board', boardConfig);
+    setBoardSize(); // ボード初期化後にも一度サイズを設定
+
+    // 初期ロード時とウィンドウのリサイズ時にボードサイズを設定
+    window.addEventListener('resize', setBoardSize);
+
 
     // Event listener for the "Play Again" button
     document.querySelector('.play-again').addEventListener('click', () => {
@@ -338,6 +357,7 @@ document.addEventListener('DOMContentLoaded', () => {
         userColor = 'w';
         aiLevel = 1; // Reset AI level on new game
         aiLevelDisplay.textContent = `(AI Level: ${aiLevel})`;
+        setBoardSize(); // リセット時にもボードサイズを再調整
     });
 
     // Event listener for the "Level Down" button
@@ -374,6 +394,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 aiLevel = 1; // FEN入力時はAIレベルをリセット
                 aiLevelDisplay.textContent = `(AI Level: ${aiLevel})`;
+                setBoardSize(); // FEN入力時にもボードサイズを再調整
             } else {
                 alert("Invalid FEN notation. Please try again.");
             }
@@ -381,13 +402,20 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Flip Boardボタンの動作変更
-    document.querySelector('.flip-board').addEventListener('click', () => {
-        board.flip();
-        // 盤面をフリップした後、AIの色も反転させる
-        userColor = userColor === 'w' ? 'b' : 'w';
-        // AIの手番になった場合、すぐに手を指させる
-        if (game.turn() !== userColor) {
-            makeAiMove();
-        }
-    });
+    // 注意: index.html には .flip-board ボタンが定義されていません。
+    // もしこの機能が必要であれば、index.html にボタンを追加してください。
+    // 例: <button class="flip-board">盤面を反転</button>
+    const flipButton = document.querySelector('.flip-board');
+    if (flipButton) {
+        flipButton.addEventListener('click', () => {
+            board.flip();
+            // 盤面をフリップした後、AIの色も反転させる
+            userColor = userColor === 'w' ? 'b' : 'w';
+            // AIの手番になった場合、すぐに手を指させる
+            if (game.turn() !== userColor) {
+                makeAiMove();
+            }
+            setBoardSize(); // フリップ時にもボードサイズを再調整
+        });
+    }
 });
