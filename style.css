@@ -1,3 +1,5 @@
+/* style.css */
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 *{
@@ -8,25 +10,25 @@
 }
 
 body{
-    min-height: 100vh; /* height を min-height に変更して、コンテンツが少ない場合でも画面いっぱいに広がるように */
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: #f2f2f2;
-    padding: 10px; /* 小さい画面での余白を追加 */
-    overflow-x: hidden; /* 横方向のスクロールを防止 */
+    padding: 10px;
+    overflow-x: hidden;
 }
 
 .container{
     background-color: #fff;
-    padding: 1.5rem; /* パディングを少し減らす */
+    padding: 1.5rem;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    width: 100%; /* コンテナの幅を100%に設定 */
-    max-width: 450px; /* 最大幅を設定してPC表示でも大きくなりすぎないように */
-    display: flex; /* 追加: 子要素をflexboxで制御 */
-    flex-direction: column; /* 追加: 子要素を縦方向に配置 */
-    align-items: center; /* 追加: 子要素を中央寄せ */
+    width: 100%;
+    max-width: 450px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 h1{
@@ -35,20 +37,20 @@ h1{
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.5em; /* フォントサイズを調整 */
-    flex-wrap: wrap; /* テキストが長い場合に折り返す */
+    font-size: 1.5em;
+    flex-wrap: wrap;
 }
 
 #ai-level {
-    margin-left: 5px; /* マージンを調整 */
-    font-size: 0.7em; /* フォントサイズを調整 */
+    margin-left: 5px;
+    font-size: 0.7em;
     color: #555;
-    white-space: nowrap; /* 折り返しを防ぐ */
+    white-space: nowrap;
 }
 
 .board{
-    width: 100%; /* 画面幅に合わせてボードの幅を100%に */
-    max-width: 400px; /* ボードの最大幅を設定 */
+    width: 100%;
+    max-width: 400px;
     margin: 20px auto;
 }
 
@@ -56,50 +58,36 @@ h1{
     margin-top: 20px;
     display: flex;
     justify-content: center;
-    gap: 8px; /* ボタン間のスペースを調整 */
-    flex-wrap: wrap; /* ボタンが画面からはみ出す場合に折り返す */
-    width: 100%; /* ボタンコンテナの幅を100%に */
+    gap: 8px;
+    flex-wrap: wrap;
+    width: 100%;
 }
 
 button{
     color: #fff;
     background-color: #000;
     border: none;
-    width: calc(33% - 8px); /* 3つのボタンが横に並ぶように調整 (gapも考慮) */
-    min-width: 100px; /* ボタンの最小幅 */
+    width: calc(33% - 8px);
+    min-width: 100px;
     height: 40px;
     border-radius: 6px;
-    font-size: 0.85rem; /* フォントサイズを調整 */
+    font-size: 0.85rem;
     cursor: pointer;
     transition: all 0.3s ease;
-    padding: 0 5px; /* パディングを追加 */
+    padding: 0 5px;
 }
 
 button:hover{
     background-color: #434343;
 }
-
-.move-history{
-    margin-top: 20px;
-    border: 1px solid #ccc;
-    padding: 10px;
-    border-radius: 5px;
-    height: 100px;
-    width: 100%; /* 履歴表示エリアの幅を100%に */
-    max-width: 400px; /* 最大幅を設定 */
-    overflow-y: scroll;
-    background-color: #f2f2f2;
-    word-break: break-word; /* 長い単語でも改行されるように */
-}
-
 /* スマートフォン向けの調整 (画面幅が600px以下の場合に適用) */
 @media (max-width: 600px) {
     body {
-        padding: 5px; /* さらにパディングを減らす */
+        padding: 5px;
     }
 
     .container {
-        padding: 1rem; /* さらにパディングを減らす */
+        padding: 1rem;
     }
 
     h1 {
@@ -107,26 +95,26 @@ button:hover{
     }
 
     button {
-        width: calc(50% - 5px); /* 2列表示にする場合 (例: '再プレイ'と'レベルダウン'、'レベルアップ'と空き) */
+        width: calc(50% - 5px);
     }
 
     .board {
-        width: 95vw; /* ビューポートの幅に対する割合で設定 */
-        max-width: 350px; /* 小さめの最大幅 */
+        width: 95vw;
+        max-width: 350px;
     }
 }
 
 /* 非常に小さい画面（例: iPhone SE など、幅が375px以下の場合に適用）向けの調整 */
 @media (max-width: 375px) {
     button {
-        width: 100%; /* ボタンを縦に並べる */
-        margin-bottom: 8px; /* ボタン間の縦方向のスペース */
+        width: 100%;
+        margin-bottom: 8px;
     }
     .buttons {
-        flex-direction: column; /* ボタンを縦に並べる */
-        align-items: center; /* ボタンを中央寄せ */
+        flex-direction: column;
+        align-items: center;
     }
     .board {
-        width: 90vw; /* さらに小さく */
+        width: 90vw;
     }
 }
